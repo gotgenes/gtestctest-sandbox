@@ -19,7 +19,7 @@ ExternalProject_Add(
 	# the SHA1 if this updates.
 	URL http://googlemock.googlecode.com/files/gmock-1.6.0.zip
 	URL_HASH SHA1=4702e98af194d320a915f1e6d2532a32b280819e
-	TIMEOUT 30
+	TIMEOUT 3000
 	#
 	# NOTE: The below flags don't seem to work for GoogleMock/GoogleTest
 	# because it uses an older CMake policy; we'll ignore it for now. If
@@ -36,14 +36,16 @@ ExternalProject_Add(
 	LOG_CONFIGURE ON
 	LOG_BUILD ON
 )
+
+# Look for application headers in the src folder. We do it this way to mimic the callannotate setup.
+include_directories(${HGT_SOURCE_DIR})
+
 # Specify include dir
 ExternalProject_Get_Property(googlemock SOURCE_DIR)
 # Include GoogleMock
 include_directories(${SOURCE_DIR} ${SOURCE_DIR}/include})
 # Include GoogleTest
 include_directories(${SOURCE_DIR}/gtest ${SOURCE_DIR}/gtest/include)
-
-
 enable_testing()
 
 # Build tests
@@ -64,8 +66,6 @@ target_link_libraries(runUnitTests
                       ${BINARY_DIR}/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a
                       ${BINARY_DIR}/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main.a
 )
-
-
 # Run tests
 add_test(runUnitTests runUnitTests)
 
