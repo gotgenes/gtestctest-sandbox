@@ -39,7 +39,7 @@ ExternalProject_Add(
 # Specify include dir
 ExternalProject_Get_Property(googlemock SOURCE_DIR)
 # Include GoogleMock
-include_directories(${SOURCE_DIR} ${SOURCE_DIR}/include})
+include_directories(${SOURCE_DIR} ${SOURCE_DIR}/include)
 # Include GoogleTest
 include_directories(${SOURCE_DIR}/gtest ${SOURCE_DIR}/gtest/include)
 
