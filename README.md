@@ -12,3 +12,10 @@ make
 ctest
 ```
 
+The sandboxed project has three tests spread out over 2 test cases.
+2 of the tests are expected to pass, 1 test is expected to fail.
+To see the more detailed output from the test runner use:
+
+```
+ctest --verbose
+```
