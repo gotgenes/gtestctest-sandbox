@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8.6)
 project(HelloGTest CXX)
 set(HGT_SOURCE_DIR ${HelloGTest_SOURCE_DIR}/src)
 
+add_executable(execexample ${HGT_SOURCE_DIR}/execexample.cpp)
+
 # We're going to fetch GoogleMock and GoogleTest externally from the intarwebs
 # and install it as what CMake knows as an "ExternalProject"
 # Add GoogleMock
@@ -66,6 +68,13 @@ target_link_libraries(runUnitTests
                       ${BINARY_DIR}/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a
                       ${BINARY_DIR}/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main.a
 )
+
 # Run tests
+
+# Compiled unit tests:
 add_test(runUnitTests runUnitTests)
+
+# Integration tests:
+add_test(passing_integration_test ${PROJECT_SOURCE_DIR}/tests/passing_integration_test.sh ${CMAKE_CURRENT_BINARY_DIR}/execexample)
+add_test(failing_integration_test ${PROJECT_SOURCE_DIR}/tests/failing_integration_test.sh)
 
